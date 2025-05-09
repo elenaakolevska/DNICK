@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}"/>
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.js' %}"></script>
+</head>
+
+<body>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+          <div class="container-fluid d-flex justify-content-end">
+            <a class="navbar-brand  ps-4" href="#">Eventually</a>
+            <div class="collapse navbar-collapse d-flex justify-content-end pe-5" id="navbarNav">
+
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link active" href="/index">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/add-event">Ask for Event</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Services</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link">Contact</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+    <div class="container-fluid" style="background-image: url('{% static "images/slika.jpg" %}'); background-size: cover; background-position: center; height: 30rem">
+        <div class="row">
+            <h2 class="fw-lighter mt-5 ms-5" style="font-size: 25px">THE BEST SOLUTIONS FOR OUR CLIENTS</h2>
+            <h1 class="flex-wrap w-75 fw-light  ms-5" style="font-size: 5rem">We create exclusive events using modern technologies and extensive features.</h1>
+        </div>
+    </div>
+    <div class="container">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for event in event_list %}
+        <div class="col d-flex
+            {% if forloop.counter0|divisibleby:3 %}
+                align-items-center
+            {% elif forloop.counter0|add:'-1'|divisibleby:3 %}
+                align-items-start
+            {% else %}
+                align-items-end
+            {% endif %}
+        " style="height: 600px">
+            <div class="card" style="height: 400px; width: 300px">
+                <img src="{{ event.image.url }}" class="card-img-top" style="height: 200px; width: 300px; background-size: cover" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ event.name }}</h5>
+                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+
+                    {% if event.is_outside %}
+                        <p>Outside</p>
+                    {% else %}
+                        <p>Inside</p>
+                    {% endif %}
+                    <a href="{% url 'edit-event' event.id %}" class="btn btn-info">Edit </a>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+</body>
+</html>
