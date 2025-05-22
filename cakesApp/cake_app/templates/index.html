@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row bg-danger">
+    <div class="col p-5">
+        <h1 class="text-light fw-lighter w-75 ps-5 pt-5">Explore the wonderland of tastes!</h1>
+        <small class="ps-5 text-light">Assignment for HCI Exam in September 2024</small>
+        <div class="d-flex ps-5 pt-5">
+            <button class="btn btn-light">Get Started</button>
+            <button class="btn btn-outline-light ms-3">Learn More</button>
+
+        </div>
+
+    </div>
+    <div class="col p-5">
+        <img src="{%  static 'main.png'%}" width="450px" height="300px" alt="...">
+    </div>
+</div>
+<div class="row d-flex justify-content-center m-5">
+    <p class=" m-5 w-25">"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur corporis doloribus facere laudantium provident repudiandae sint temporibus! Assumenda error et, incidunt maxime nobis obcaecati."
+    </p>
+
+    <div class="d-flex justify-content-center">
+        <img src="{%  static 'avatar.png'%}" width="40px" height="40px" alt="...">
+        <p class="ps-3 fw-bold">John Doe / CEO, Cakery&Bakery</p>
+    </div>
+
+</div>
+
+ <div class=" bg-light">
+    <h3 class="d-flex justify-content-center text-bold mt-5 pt-5">Products</h3>
+    <h6 class="d-flex justify-content-center text-secondary">Add more products in the edit form!</h6>
+     <div class="row">
+        {% for cake in cake_list %}
+            <div class=" col-4 px-5">
+                <div class="card">
+                  <img src="{{ cake.photo.url }}" class="card-img-top"  alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ cake.name }}</h5>
+                    <p class="card-text">{{ cake.description }}</p>
+                      <img src="{{ cake.baker.photo.url }} %}" alt="..."> <span>{{ cake.baker.name }} </span>
+
+                  </div>
+                </div>
+            </div>
+
+        {% endfor %}
+
+
+
+
+    </div>
+ </div>
+
+
+
+    {% endblock %}

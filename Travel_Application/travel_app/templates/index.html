@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.js' %}"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand ms-5" href="#">TravelApp</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse d-flex justify-content-end me-5" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/index">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/add_travel">Add Travel</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" >Disabled</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container-fluid">
+    <div class="row mt-5 ">
+           <div class="col-6">
+               <h2 class="ms-5 mt-5 d-flex justify-content-center">Travel Application</h2>
+               <small class="ms-5 mt-5 d-flex justify-content-center">Book your holiday now!</small>
+           </div>
+           <div class="col-6">
+               <img src="{% static 'prva.jpg' %}" style="width: 450px; height: 300px">
+
+           </div>
+        <div class="col-6 d-flex justify-content-center">
+           <img src="{% static 'vtora.jpg' %}" style="width: 450px; height: 300px">
+        </div>
+        <div class="col-6 me-5 d-flex align-items-center" style="width: 400px">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusantium adipisci aliquam architecto beatae blanditiis dolorem, ea esse illo ipsa ipsam itaque libero magnam molestias nisi perferendis tenetur veritatis voluptates!</p>
+
+        </div>
+        <div class="col-6">
+
+       </div>
+    </div>
+</div>
+
+<div class="row p-5">
+    <h1 class="fs-5 fw-bold text-center">Travel Destinations</h1>
+    <p class="text-secondary text-center">Add more destinations in the add form</p>
+
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        {% for travel in travel_list %}
+            <div class="col-12 d-flex justify-content-center">
+             <div class="card mb-3" style="max-width: 540px;">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img src="{{ travel.photo.url }}" class="img-fluid rounded-start" alt="..." style="width: 500px; height: 200px">
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ travel.place_name }}</h5>
+                    <p class="card-text">Price: ${{ travel.price }}</p>
+                    <p class="card-text">Duration: {{ travel.duration }} days.</p>
+                    <p class="card-text">Tour Guide: {{ travel.guide.name }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+
+        {% endfor %}
+    </div>
+</div>
+
+
+</body>
+</html>
