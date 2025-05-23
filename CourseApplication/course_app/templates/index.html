@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}"/>
+    <script src="{%  static 'bootstrap/js/bootstrap.bundle.js' %}"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand ms-5" href="#">CoursesApp</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse d-flex justify-content-end me-5" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'add_course' %}">Add Course</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">Disabled</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row" style="background-image: url('{% static 'main.webp' %}');  height: 400px">
+        <div class="col-6 d-flex align-items-center ps-5">
+            <h1>Welcome to our Course App</h1>
+        </div>
+
+        <div class="col-6 d-flex align-items-center w-25 ps-5">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias amet beatae culpa cumque dolor dolorum eligendi illum ipsa labore, laborum numquam, odit pariatur placeat quam rem repudiandae totam ut voluptatibus.
+        </div>
+    </div>
+</div>
+
+<div class="row p-5">
+    <p class="fs-5 fw-bold text-center">Courses</p>
+</div>
+
+
+    <div class="row justify-content-center">
+
+        {% for course in course_list %}
+            <div class="col-4 px-5 py-5">
+              <div class="card" style="width: 18rem;">
+              <img src="{{ course.photo.url }}" class="card-img-top" alt="..." style="height: 250px; width: 280px">
+              <div class="card-body">
+                <h5 class="card-title">{{ course.name }}</h5>
+                <p class="card-text">{{ course.start_date }} - {{ course.end_date }}</p>
+                 <h6>Lecturers:</h6>
+                    <ul>
+                      {% for lc in course.lecturercourse_set.all %}
+                        {% if lc.lecturer %}
+                          <li>{{ lc.lecturer.name }} {{ lc.lecturer.surname }} ({{ lc.lecturer.country }})</li>
+                        {% endif %}
+                      {% empty %}
+                        <li>No lecturers assigned</li>
+                      {% endfor %}
+                    </ul>
+                <a href="{% url 'edit_course' course.id %}" class="btn btn-primary">Edit</a>
+              </div>
+            </div>
+            </div>
+
+        {% endfor %}
+    </div>
+
+
+
+</body>
+</html>

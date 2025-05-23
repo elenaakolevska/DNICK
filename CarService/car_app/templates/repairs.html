@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{%  static 'bootstrap/css/bootstrap.css' %}">
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.js' %}"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Home</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Repairs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Manufacture</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" aria-disabled="true" href="#">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+    <div style="background-image: url('{% static "main.jpg" %}'); height: 350px; background-size: cover; background-position: center;">
+        <h1 class="text-light pt-5 ps-5" style="font-size: 48px; width: 660px">HONEST, QUALITY WORK <strong>AT AFFORDABLE PRICES</strong></h1>
+        <p class="text-light ps-5 w-50">We provide top-notch service for import and domestic car repairs. Servicing Brakes, Exhaust, Tune Ups, Engine Repairs, Electrical and A.C Systems.</p>
+        <button class="btn btn-info text-light ms-5 fw-bold">GET FREE QUOTES</button>
+    </div>
+
+
+<div class="row">
+    {% for service in repairs %}
+        <div class="col-4 d-flex justify-content-center mt-5 mb-3">
+            <div class="card" style="width: 18rem; background-color: #1a1d20">
+              <img src="{{ service.photo.url }}" class="card-img-top" alt="..." style="height: 220px">
+              <div class="card-body">
+                <h5 class="card-title text-light">{{ service.code }}</h5>
+                  <p class="text-muted text-light">{{ service.car.type }}</p>
+                <p class="card-tex text-light">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+                <a href="#" class="btn btn-primary text-light">Fix</a>
+              </div>
+            </div>
+        </div>
+
+    {% endfor %}
+</div>
+<div class="row">
+    <div class="d-flex justify-content-center bg-secondary-subtle">
+        <form method="post" action="{% url 'repairs' %}" enctype="multipart/form-data" class="w-75 p-5">
+            <p class="fs-3 fw-bold text-center">Add new service</p>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-info">Submit</button>
+        </form>
+    </div>
+</div>
+
+</div>
+</body>
+</html>
