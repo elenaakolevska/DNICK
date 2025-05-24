@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}"/>
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.js' %}"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+      <img src="{% static 'logo.png' %}" style="height: 50px; width: 100px"/>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse d-flex justify-content-end me-5" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Projects</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">Contacts</a>
+        </li>
+          <li>
+              <button class="btn btn-dark">Contact us</button>
+          </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6">
+            <p class="fs-1  d-flex justify-content-center align-items-center mt-5 pt-5">Architecture</p>
+            <p class="text-secondary fs-1  d-flex justify-content-center align-items-center ">Bureau</p>
+        </div>
+        <div class="col-6">
+            <img src="{% static 'house3.jpg' %}" style="background-size: cover" class="mt-5 me-5"/>
+        </div>
+        <div class="col-6">
+            <img src="{% static 'house4.jpg' %}" style="background-size: cover" class="mt-5 ms-5"/>
+
+        </div><div class="col-6">
+            <p class="fs-3 text-secondary d-flex justify-content-center align-items-center mt-5 pt-5 w-50">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ducimus ea harum ipsum iste itaque laborum officia provident quidem, repellendus, sequi similique. Aliquid est illum incidunt laborum libero perferendis rem!</p>
+
+        </div>
+
+    </div>
+
+
+
+</div>
+
+<div class="row">
+    <p class="d-flex justify-content-center fs-1 mt-5">We offer variety of projects</p>
+    <div class="d-flex justify-content-evenly">
+        <p>All houses</p>
+        <p class="text-secondary">Stone houses</p>
+        <p class="text-secondary">Frame houses</p>
+    </div>
+
+   <div class="row justify-content-center">
+    {% for estate in real_estates %}
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 pt-5 d-flex justify-content-center">
+            <div class="card" style="width: 18rem;">
+                <img src="{{ estate.real_estate.photo.url }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ estate.real_estate.name }}</h5>
+                    <p class="card-text">Area {{ estate.real_estate.area }} sqm</p>
+                    <p class="card-text">Price {{ estate.price }} $</p>
+                    <a href="{% url 'edit_estate' estate.real_estate.id %}" class="btn btn-dark">Edit</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+
+
+
+</div>
+
+
+
+</body>
+</html>
